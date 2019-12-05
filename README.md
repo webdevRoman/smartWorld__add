@@ -1,2 +1,2 @@
 # smartWorld__add
-Additional test tasks
+Additional test tasks for the traineeship in the company Smart World.

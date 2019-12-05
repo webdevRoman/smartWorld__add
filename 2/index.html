@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <title>Credit Card</title>
+</head>
+
+<body>
+  <div id="app">
+
+    <div class="card">
+      <div class="card-front">
+        <div class="card-bank">СпёрБанк</div>
+        <div class="card-number">
+          <div class="card-input card-number__item">{{ cardNumber(0) }}</div>
+          <div class="card-input card-number__item">{{ cardNumber(1) }}</div>
+          <div class="card-input card-number__item">{{ cardNumber(2) }}</div>
+          <div class="card-input card-number__item">{{ cardNumber(3) }}</div>
+        </div>
+        <div class="card-date">
+          <input type="text" class="card-input card-month" value="MM" disabled>
+          <div class="card-date__separator">/</div>
+          <input type="text" class="card-input card-year" value="YY" disabled>
+        </div>
+        <div class="card-bot">
+          <input type="text" class="card-input card-holder" value="FULL NAME" disabled>
+          <div class="card-type">
+            <img src="img/visa.png" alt="Visa logo" v-if="visa">
+            <img src="img/mastercard.png" alt="Mastercard logo" v-else-if="mastercard">
+            <img src="img/mir.png" alt="Mir logo" v-else-if="mir">
+          </div>
+        </div>
+      </div>
+      <div class="card-back">
+        <div class="card-cvv">
+          <input type="text" class="card-input card-cvv__input" value="CVV">
+        </div>
+      </div>
+    </div>
+
+    <form action="#" class="form" @submit.prevent="checkForm()">
+      <div class="form-number">
+        <label for="card-number" class="form-label">Номер карты</label>
+        <input type="text" class="form-input" id="form-number" v-model="formNumber" @keyup="checkNumber($event)">
+      </div>
+      <div class="form-holder">
+        <label for="card-holder" class="form-label">Держатель карты</label>
+        <input type="text" class="form-input" id="form-holder" v-model="formHolder" @keyup="checkHolder($event)">
+      </div>
+      <div class="form-block">
+        <div class="form-date">
+          <label for="#" class="form-label">Срок действия</label>
+          <div class="form-inputs">
+            <input type="text" name="month" class="form-input form-month" v-model="formMonth" @keyup="checkMonth($event)" @focusout="correctMonth($event)">
+            <div class="form-separator">/</div>
+            <input type="text" name="year" class="form-input" v-model="formYear" @keyup="checkYear($event)" @focusout="correctYear($event)">
+          </div>
+        </div>
+        <div class="form-cvv">
+          <label for="form-cvv" class="form-label">CVV</label>
+          <input type="text" name="cvv" id="form-cvv" class="form-input" v-model="formCvv"  @focus="rotateCard()" @keyup="checkCvv($event)" @focusout="correctCvv($event)">
+        </div>
+      </div>
+      <button type="submit" class="form-submit">Отправить</button>
+    </form>
+
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+  <script src="index.js"></script>
+</body>
+
+</html>

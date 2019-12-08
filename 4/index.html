@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- <link rel="stylesheet" href="assets/style.css"> -->
+  <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.4.95/css/materialdesignicons.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.1.1/vuetify.min.js"></script> -->
+  <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" /> -->
+  <title>Simple chat</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #3a3535;
+      font-family: "Roboto", sans-serif;
+      color: #fff;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    img {
+      width: 100%;
+    }
+    button {
+      display: block;
+      border: none;
+      cursor: pointer;
+    }
+    input, button {
+      outline: none;
+    }
+
+    .btn {
+      padding: 15px 50px;
+      background-color: #ff7315;
+      font-size: 18px;
+      color: #fff;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background-color: #D55E0D;
+    }
+
+    .join {
+      width: 500px;
+      padding: 60px;
+      background-color: #232020;
+      box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.3);
+      margin: 10% auto 0 auto;
+    }
+    .join-form__input {
+      display: block;
+      width: 100%;
+      padding: 10px 15px;
+      background-color: transparent;
+      border: none;
+      border-bottom: 2px solid #3a3535;
+      font-size: 16px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 30px;
+      transition: 0.3s;
+    }
+    .join-form__input:focus {
+      border-bottom: 2px solid #ff7315;
+    }
+    .join-form__btn {
+      width: 100%;
+    }
+
+    .chat {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+    }
+    .chat-popup {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+    }
+    .chat-popup__item {
+      width: 300px;
+      padding: 20px;
+      background-color: #232020;
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+      margin-bottom: 10px;
+    }
+    .chat-sidebar {
+      flex-basis: 20%;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      padding: 20px;
+      background-color: #232020;
+      box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.3);
+    }
+    .chat-sidebar__title {
+      font-size: 22px;
+      font-weight: normal;
+      margin-bottom: 10px;
+    }
+    .btn-exit {
+      padding: 12px 35px;
+      font-size: 16px;
+    }
+    .chat-sidebar__connections {
+      font-size: 13px;
+    }
+    .chat-messages {
+      flex-basis: 80%;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+    }
+    .chat-send {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 10px 20px;
+      background-color: #232020;
+      border-left: 3px solid #3a3535;
+      margin-top: 10px;
+    }
+    .chat-send__input {
+      display: block;
+      width: 80%;
+      padding: 10px 15px;
+      background-color: transparent;
+      border: none;
+      border-bottom: 2px solid #3a3535;
+      font-size: 16px;
+      color: #fff;
+      transition: 0.3s;
+    }
+    .chat-send__input:focus {
+      border-bottom: 2px solid #ff7315;
+    }
+    .chat-send__btn {
+      width: 18%;
+      padding: 10px 25px;
+      font-size: 16px;
+    }
+    .chat-message {
+      padding-left: 0;
+      padding-right: 10px;
+      margin: 20px;
+      max-height: 85%;
+    }
+    .chat-message_scrollable {
+      overflow-y: scroll;
+    }
+    .chat-message_scrollable::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+      background-color: #F5F5F5;
+    }
+    .chat-message_scrollable::-webkit-scrollbar {
+      width: 12px;
+      background-color: #F5F5F5;
+    }
+    .chat-message_scrollable::-webkit-scrollbar-thumb {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+      background-color: #555;
+    }
+    .chat-message__typing {
+      margin-left: 20px;
+    }
+    .chat-message__item {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .chat-message__sender {
+      margin: 0 0 5px 10px;
+    }
+    .chat-message__text {
+      width: 70%;
+      padding: 10px;
+      background-color: #232020;
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+    }
+    .chat-message__my {
+      align-self: flex-end;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+
+    <div class="container">
+
+      <div v-if="!ready" class="join">
+        <form @submit.prevent="addUser" class="join-form">
+          <input type="text" class="join-form__input" v-model="username" placeholder="Введите имя пользователя">
+          <button type="submit" class="btn join-form__btn">Присоединиться</button>
+        </form>
+      </div>
+
+      <div class="chat" v-else>
+
+        <div class="chat-popup">
+          <div class="chat-popup__item" v-for="user in info">
+            {{ user.username }} {{ user.type }}
+          </div>
+        </div>
+
+        <div class="chat-sidebar">
+          <div class="chat-sidebar__top">
+            <h2 class="chat-sidebar__title">{{ username }}</h2>
+            <div class="chat-sidebar__connections">
+              Онлайн пользователей: {{ connections }}
+            </div>
+          </div>
+          <div class="chat-sidebar__bot">
+            <button class="btn btn-exit" @click.prevent="ready = false; username = null; messages = []">Выход</button>
+          </div>
+        </div>
+        
+        <div class="chat-messages">
+          <ul class="chat-message">
+            <li class="chat-message__item" v-for="message in messages">
+              <div class="chat-message__sender" v-if="message.type === 1">{{ message.user }}</div>
+              <div :class="{'chat-message__text chat-message__my':message.type !== 1, 'chat-message__text':message.type == 1}" class="chat-message__text">{{ message.message }}</div>
+            </li>
+          </ul>
+
+          <div class="chat-bottom">
+            <small v-if="typing" class="chat-message__typing">{{ typing }} печатает...</small>
+            <form class="chat-send" @submit.prevent="send">
+              <input type="text" class="chat-send__input" v-model="newMessage" placeholder="Введите сообщение">
+              <button type="submit" class="btn chat-send__btn">Отправить</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <!-- <script src="index.js"></script> -->
+  <script>
+    const socket = io()
+
+    let vue = new Vue({
+      el: '#app',
+      data: {
+        newMessage: null,
+        messages: [],
+        typing: false,
+        username: null,
+        ready: false,
+        info: [],
+        connections: 0,
+        drawer: null
+      },
+      created() {
+        window.onbeforeunload = () => {
+          socket.emit('leave', this.username)
+        }
+
+        socket.on('chat-message', (data) => {
+          this.messages.push({
+            message: data.message,
+            type: 1,
+            user: data.user,
+          })
+        })
+        socket.on('typing', (data) => {
+          this.typing = data;
+        })
+        socket.on('stopTyping', () => {
+          this.typing = false
+        })
+        socket.on('joined', (data) => {
+          this.info.push({
+            username: data,
+            type: 'присоединился'
+          })
+          setTimeout(() => {
+            this.info = []
+          }, 5000)
+        })
+        socket.on('leave', (data) => {
+          this.info.push({
+            username: data,
+            type: 'вышел'
+          })
+          setTimeout(() => {
+            this.info = []
+          }, 5000)
+        })
+        socket.on('connections', (data) => {
+          this.connections = data
+        })
+      },
+      watch: {
+        newMessage(value) {
+          value ? socket.emit('typing', this.username) : socket.emit('stopTyping')
+        }
+      },
+      methods: {
+        send() {
+          this.messages.push({
+            message: this.newMessage,
+            type: 0,
+            user: 'Me',
+          })
+          socket.emit('chat-message', {
+            message: this.newMessage,
+            user: this.username
+          })
+          this.newMessage = null
+          setTimeout(function() {
+            const mesBlock = document.querySelector('.chat-message')
+            if (mesBlock.offsetHeight > window.innerHeight * 0.8) {
+              mesBlock.classList.add('chat-message_scrollable')
+              mesBlock.scrollTop = mesBlock.scrollHeight
+            }
+          }, 100)
+        },
+        addUser() {
+          this.ready = true
+          socket.emit('joined', this.username)
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

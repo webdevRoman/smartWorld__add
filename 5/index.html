@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <title>Clock</title>
+</head>
+
+<body>
+  <div id="app">
+    <div class="main">
+      <h1 class="title">IT часы</h1>
+      <div class="clock">{{ time }}</div>
+      <div class="action">
+        <div class="action-block" v-if="sleep">
+          <div class="action-title">Спим</div>
+          <img src="img/sleep.jpg" alt="Image">
+        </div>
+        <div class="action-block" v-if="program">
+          <div class="action-title">Программируем</div>
+          <img src="img/program.jpg" alt="Image">
+        </div>
+        <div class="action-block" v-if="increment">
+          <div class="action-title">Инкрементируем</div>
+          <img src="img/increment.jpg" alt="Image">
+        </div>
+        <div class="action-block" v-if="develop">
+          <div class="action-title">Развиваемся</div>
+          <img src="img/develop.jpg" alt="Image">
+        </div>
+        <div class="action-block" v-if="test">
+          <div class="action-title">Тестируем</div>
+          <img src="img/test.jpg" alt="Image">
+        </div>
+        <div class="action-block" v-if="binary_tree">
+          <div class="action-title">Изучаем бинарные деревья</div>
+          <img src="img/binary_tree.gif" alt="Image">
+        </div>
+        <div class="action-block" v-if="code">
+          <div class="action-title">Пишем код</div>
+          <img src="img/code.jpg" alt="Image">
+        </div>
+        <div class="action-block" v-if="close_sprint">
+          <div class="action-title">Закрываем спринт</div>
+          <img src="img/close_sprint.jpg" alt="Image">
+        </div>
+        <div class="action-block" v-if="js">
+          <div class="action-title">Кодим на JS</div>
+          <img src="img/js.jpg" alt="Image">
+        </div>
+        <div class="action-block" v-if="hackathon">
+          <div class="action-title">Участвуем в хакатоне</div>
+          <img src="img/hackathon.jpg" alt="Image">
+        </div>
+        <div class="action-block" v-if="round">
+          <div class="action-title">Округляем</div>
+          <img src="img/round.jpg" alt="Image">
+        </div>
+        <div class="action-block" v-if="past">
+          <div class="action-title">Вспоминаем прошлое</div>
+          <img src="img/past.jpg" alt="Image">
+        </div>
+        <div class="action-block" v-if="party">
+          <div class="action-title">Вечеринка</div>
+          <img src="party/party.gif" alt="Party!">
+        </div>
+      </div>
+    </div>
+    <div class="settings">
+      <div class="setting">
+        <div class="setting-title">Время спать</div>
+        <select name="sleep" id="sleep" class="setting-time" v-model="sleepTime">
+          <option value="0" selected>00:00 - 02:00</option>
+          <option value="2">02:00 - 04:00</option>
+          <option value="4">04:00 - 06:00</option>
+          <option value="6">06:00 - 08:00</option>
+          <option value="8">08:00 - 10:00</option>
+          <option value="10">10:00 - 12:00</option>
+          <option value="12">12:00 - 14:00</option>
+          <option value="14">14:00 - 16:00</option>
+          <option value="16">16:00 - 18:00</option>
+          <option value="18">18:00 - 20:00</option>
+          <option value="20">20:00 - 22:00</option>
+          <option value="22">22:00 - 24:00</option>
+        </select>
+      </div>
+      <div class="setting">
+        <div class="setting-title">Время программировать</div>
+        <select name="program" id="program" class="setting-time" v-model="programTime">
+          <option value="0">00:00 - 02:00</option>
+          <option value="2" selected>02:00 - 04:00</option>
+          <option value="4">04:00 - 06:00</option>
+          <option value="6">06:00 - 08:00</option>
+          <option value="8">08:00 - 10:00</option>
+          <option value="10">10:00 - 12:00</option>
+          <option value="12">12:00 - 14:00</option>
+          <option value="14">14:00 - 16:00</option>
+          <option value="16">16:00 - 18:00</option>
+          <option value="18">18:00 - 20:00</option>
+          <option value="20">20:00 - 22:00</option>
+          <option value="22">22:00 - 24:00</option>
+        </select>
+      </div>
+      <div class="setting">
+        <div class="setting-title">Время инкремента</div>
+        <select name="increment" id="increment" class="setting-time" v-model="incrementTime">
+          <option value="0">00:00 - 02:00</option>
+          <option value="2">02:00 - 04:00</option>
+          <option value="4" selected>04:00 - 06:00</option>
+          <option value="6">06:00 - 08:00</option>
+          <option value="8">08:00 - 10:00</option>
+          <option value="10">10:00 - 12:00</option>
+          <option value="12">12:00 - 14:00</option>
+          <option value="14">14:00 - 16:00</option>
+          <option value="16">16:00 - 18:00</option>
+          <option value="18">18:00 - 20:00</option>
+          <option value="20">20:00 - 22:00</option>
+          <option value="22">22:00 - 24:00</option>
+        </select>
+      </div>
+      <div class="setting">
+        <div class="setting-title">Время развиваться</div>
+        <select name="develop" id="develop" class="setting-time" v-model="developTime">
+          <option value="0">00:00 - 02:00</option>
+          <option value="2">02:00 - 04:00</option>
+          <option value="4">04:00 - 06:00</option>
+          <option value="6" selected>06:00 - 08:00</option>
+          <option value="8">08:00 - 10:00</option>
+          <option value="10">10:00 - 12:00</option>
+          <option value="12">12:00 - 14:00</option>
+          <option value="14">14:00 - 16:00</option>
+          <option value="16">16:00 - 18:00</option>
+          <option value="18">18:00 - 20:00</option>
+          <option value="20">20:00 - 22:00</option>
+          <option value="22">22:00 - 24:00</option>
+        </select>
+      </div>
+      <div class="setting">
+        <div class="setting-title">Время тестирования</div>
+        <select name="test" id="test" class="setting-time" v-model="testTime">
+          <option value="0">00:00 - 02:00</option>
+          <option value="2">02:00 - 04:00</option>
+          <option value="4">04:00 - 06:00</option>
+          <option value="6">06:00 - 08:00</option>
+          <option value="8" selected>08:00 - 10:00</option>
+          <option value="10">10:00 - 12:00</option>
+          <option value="12">12:00 - 14:00</option>
+          <option value="14">14:00 - 16:00</option>
+          <option value="16">16:00 - 18:00</option>
+          <option value="18">18:00 - 20:00</option>
+          <option value="20">20:00 - 22:00</option>
+          <option value="22">22:00 - 24:00</option>
+        </select>
+      </div>
+      <div class="setting">
+        <div class="setting-title">Время бинарных деревьев</div>
+        <select name="binary_tree" id="binary_tree" class="setting-time" v-model="binary_treeTime">
+          <option value="0">00:00 - 02:00</option>
+          <option value="2">02:00 - 04:00</option>
+          <option value="4">04:00 - 06:00</option>
+          <option value="6">06:00 - 08:00</option>
+          <option value="8">08:00 - 10:00</option>
+          <option value="10" selected>10:00 - 12:00</option>
+          <option value="12">12:00 - 14:00</option>
+          <option value="14">14:00 - 16:00</option>
+          <option value="16">16:00 - 18:00</option>
+          <option value="18">18:00 - 20:00</option>
+          <option value="20">20:00 - 22:00</option>
+          <option value="22">22:00 - 24:00</option>
+        </select>
+      </div>
+      <div class="setting">
+        <div class="setting-title">Время писать код</div>
+        <select name="code" id="code" class="setting-time" v-model="codeTime">
+          <option value="0">00:00 - 02:00</option>
+          <option value="2">02:00 - 04:00</option>
+          <option value="4">04:00 - 06:00</option>
+          <option value="6">06:00 - 08:00</option>
+          <option value="8">08:00 - 10:00</option>
+          <option value="10">10:00 - 12:00</option>
+          <option value="12" selected>12:00 - 14:00</option>
+          <option value="14">14:00 - 16:00</option>
+          <option value="16">16:00 - 18:00</option>
+          <option value="18">18:00 - 20:00</option>
+          <option value="20">20:00 - 22:00</option>
+          <option value="22">22:00 - 24:00</option>
+        </select>
+      </div>
+      <div class="setting">
+        <div class="setting-title">Время закрывать спринт</div>
+        <select name="close_sprint" id="close_sprint" class="setting-time" v-model="close_sprintTime">
+          <option value="0">00:00 - 02:00</option>
+          <option value="2">02:00 - 04:00</option>
+          <option value="4">04:00 - 06:00</option>
+          <option value="6">06:00 - 08:00</option>
+          <option value="8">08:00 - 10:00</option>
+          <option value="10">10:00 - 12:00</option>
+          <option value="12">12:00 - 14:00</option>
+          <option value="14" selected>14:00 - 16:00</option>
+          <option value="16">16:00 - 18:00</option>
+          <option value="18">18:00 - 20:00</option>
+          <option value="20">20:00 - 22:00</option>
+          <option value="22">22:00 - 24:00</option>
+        </select>
+      </div>
+      <div class="setting">
+        <div class="setting-title">Время JavaScript</div>
+        <select name="js" id="js" class="setting-time" v-model="jsTime">
+          <option value="0">00:00 - 02:00</option>
+          <option value="2">02:00 - 04:00</option>
+          <option value="4">04:00 - 06:00</option>
+          <option value="6">06:00 - 08:00</option>
+          <option value="8">08:00 - 10:00</option>
+          <option value="10">10:00 - 12:00</option>
+          <option value="12">12:00 - 14:00</option>
+          <option value="14">14:00 - 16:00</option>
+          <option value="16" selected>16:00 - 18:00</option>
+          <option value="18">18:00 - 20:00</option>
+          <option value="20">20:00 - 22:00</option>
+          <option value="22">22:00 - 24:00</option>
+        </select>
+      </div>
+      <div class="setting">
+        <div class="setting-title">Время участвовать в хакатоне</div>
+        <select name="hackathon" id="hackathon" class="setting-time" v-model="hackathonTime">
+          <option value="0">00:00 - 02:00</option>
+          <option value="2">02:00 - 04:00</option>
+          <option value="4">04:00 - 06:00</option>
+          <option value="6">06:00 - 08:00</option>
+          <option value="8">08:00 - 10:00</option>
+          <option value="10">10:00 - 12:00</option>
+          <option value="12">12:00 - 14:00</option>
+          <option value="14">14:00 - 16:00</option>
+          <option value="16">16:00 - 18:00</option>
+          <option value="18" selected>18:00 - 20:00</option>
+          <option value="20">20:00 - 22:00</option>
+          <option value="22">22:00 - 24:00</option>
+        </select>
+      </div>
+      <div class="setting">
+        <div class="setting-title">Время округлять</div>
+        <select name="round" id="round" class="setting-time" v-model="roundTime">
+          <option value="0">00:00 - 02:00</option>
+          <option value="2">02:00 - 04:00</option>
+          <option value="4">04:00 - 06:00</option>
+          <option value="6">06:00 - 08:00</option>
+          <option value="8">08:00 - 10:00</option>
+          <option value="10">10:00 - 12:00</option>
+          <option value="12">12:00 - 14:00</option>
+          <option value="14">14:00 - 16:00</option>
+          <option value="16">16:00 - 18:00</option>
+          <option value="18">18:00 - 20:00</option>
+          <option value="20" selected>20:00 - 22:00</option>
+          <option value="22">22:00 - 24:00</option>
+        </select>
+      </div>
+      <div class="setting">
+        <div class="setting-title">Время вспомнить прошлое</div>
+        <select name="past" id="past" class="setting-time" v-model="pastTime">
+          <option value="0">00:00 - 02:00</option>
+          <option value="2">02:00 - 04:00</option>
+          <option value="4">04:00 - 06:00</option>
+          <option value="6">06:00 - 08:00</option>
+          <option value="8">08:00 - 10:00</option>
+          <option value="10">10:00 - 12:00</option>
+          <option value="12">12:00 - 14:00</option>
+          <option value="14">14:00 - 16:00</option>
+          <option value="16">16:00 - 18:00</option>
+          <option value="18">18:00 - 20:00</option>
+          <option value="20">20:00 - 22:00</option>
+          <option value="22" selected>22:00 - 24:00</option>
+        </select>
+      </div>
+
+      <button class="party" @click.prevent="changeParty($event)">Вечеринка!</button>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+  <script src="index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  background-color: #dff6f0;
+}
+* {
+  box-sizing: border-box;
+}
+img, svg {
+  width: 100%;
+}
+button {
+  border: none;
+  cursor: pointer;
+}
+
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px 0;
+}
+.title {
+  background-color: transparent;
+  font-size: 36px;
+  letter-spacing: 10px;
+  margin-bottom: 30px;
+}
+.btn {
+  padding: 10px 30px;
+  background-color: #2e279d;
+  border: 3px solid #2e279d;
+  border-radius: 10px;
+  font-size: 20px;
+  color: #fff;
+  margin-right: 20px;
+  margin-bottom: 30px;
+  transition: 0.2s;
+}
+.btn:last-child {
+  margin-right: 0;
+}
+.btn:hover {
+  background-color: #4d80e4;
+}
+.map {
+  width: 1080px;
+  height: 630px;
+  background-image: url(img/map.jpg);
+  background-size: cover;
+  border: 10px solid #2e279d;
+  margin: 0 auto;
+}

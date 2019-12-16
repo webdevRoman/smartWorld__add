@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <title>Map</title>
+</head>
+
+<body>
+  <div id="app">
+
+    <div class="title">MyMap</div>
+
+    <div class="buttons">
+      <button class="btn" @mouseover.prevent="changePlace('home')" @mouseout.prevent="changePlace('')">Home</button>
+      <button class="btn" @mouseover.prevent="changePlace('studying')" @mouseout.prevent="changePlace('')">Studying</button>
+      <button class="btn" @mouseover.prevent="changePlace('traineeship')" @mouseout.prevent="changePlace('')">Traineeship</button>
+      <button class="btn" @mouseover.prevent="changePlace('food')" @mouseout.prevent="changePlace('')">Food</button>
+      <button class="btn" @mouseover.prevent="changePlace('hang-up')" @mouseout.prevent="changePlace('')">Hang Up</button>
+      <button class="btn" @mouseover.prevent="changePlace('sport')" @mouseout.prevent="changePlace('')">Sport</button>
+      <button class="btn" @mouseover.prevent="changePlace('shopping')" @mouseout.prevent="changePlace('')">Shopping</button>
+    </div>
+
+    <div class="map">
+      <img src="img/map.jpg" alt="Map" v-if="currentPlace == ''">
+      <img src="img/home.jpg" alt="Map" v-if="currentPlace == 'home'">
+      <img src="img/studying.jpg" alt="Map" v-if="currentPlace == 'studying'">
+      <img src="img/traineeship.jpg" alt="Map" v-if="currentPlace == 'traineeship'">
+      <img src="img/food.jpg" alt="Map" v-if="currentPlace == 'food'">
+      <img src="img/hang-up.jpg" alt="Map" v-if="currentPlace == 'hang-up'">
+      <img src="img/sport.jpg" alt="Map" v-if="currentPlace == 'sport'">
+      <img src="img/shopping.jpg" alt="Map" v-if="currentPlace == 'shopping'">
+    </div>
+
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+  <script src="index.js"></script>
+</body>
+
+</html>

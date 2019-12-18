@@ -45,24 +45,24 @@
     <form action="#" class="form" @submit.prevent="checkForm()">
       <div class="form-number">
         <label for="card-number" class="form-label">Номер карты</label>
-        <input type="text" class="form-input" id="form-number" v-model="formNumber" @keyup="checkNumber($event)">
+        <input type="text" class="form-input form-input__number" id="form-number" v-model="formNumber" v-mask="'####  ####  ####  ####'">
       </div>
       <div class="form-holder">
         <label for="card-holder" class="form-label">Держатель карты</label>
-        <input type="text" class="form-input" id="form-holder" v-model="formHolder" @keyup="checkHolder($event)">
+        <input type="text" class="form-input" id="form-holder" v-model="formHolder">
       </div>
       <div class="form-block">
         <div class="form-date">
           <label for="#" class="form-label">Срок действия</label>
           <div class="form-inputs">
-            <input type="text" name="month" class="form-input form-month" v-model="formMonth" @keyup="checkMonth($event)" @focusout="correctMonth($event)">
+            <input type="text" name="month" class="form-input" v-model="formMonth" v-mask="'##'" @focusout="correctMonth($event)">
             <div class="form-separator">/</div>
-            <input type="text" name="year" class="form-input" v-model="formYear" @keyup="checkYear($event)" @focusout="correctYear($event)">
+            <input type="text" name="year" class="form-input" v-model="formYear" v-mask="'##'" @focusout="correctYear($event)">
           </div>
         </div>
         <div class="form-cvv">
           <label for="form-cvv" class="form-label">CVV</label>
-          <input type="text" name="cvv" id="form-cvv" class="form-input" v-model="formCvv"  @focus="rotateCard()" @keyup="checkCvv($event)" @focusout="correctCvv($event)">
+          <input type="text" name="cvv" id="form-cvv" class="form-input" v-model="formCvv"  @focus="rotateCard()" v-mask="'###'" @focusout="correctCvv($event)">
         </div>
       </div>
       <button type="submit" class="form-submit">Отправить</button>
@@ -70,6 +70,7 @@
 
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/v-mask/dist/v-mask.min.js"></script>
   <script src="index.js"></script>
 </body>
 

@@ -135,6 +135,9 @@ img {
   letter-spacing: 5px;
   transition: 0.3s;
 }
+.form-input__number {
+  letter-spacing: 12px;
+}
 .form-input:focus {
   border: 2px solid #7c99a9;
 }
@@ -155,10 +158,9 @@ img {
   align-items: center;
 }
 .form-date input {
-  width: 80px;
-}
-.form-month {
-  text-align: right;
+  width: 60px;
+  letter-spacing: 5px;
+  text-align: center;
 }
 .form-separator {
   font-size: 32px;
@@ -166,7 +168,9 @@ img {
   margin: 0 5px;
 }
 .form-cvv input {
-  width: 120px;
+  width: 70px;
+  letter-spacing: 5px;
+  text-align: center;
 }
 .form-submit {
   width: 100%;
